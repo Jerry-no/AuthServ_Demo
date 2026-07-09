@@ -1,0 +1,22 @@
+﻿services:
+  postgres:
+    image: postgres:17
+    container_name: ecmanndb-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ecmanndb
+      POSTGRES_PASSWORD: ecmannps
+      POSTGRES_DB: ecmanndb
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecmanndb_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecmanndb -d ecmanndb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ecmanndb_postgres_data:
