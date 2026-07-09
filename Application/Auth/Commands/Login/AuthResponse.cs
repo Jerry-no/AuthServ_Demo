@@ -1,4 +1,5 @@
-﻿namespace AuthService.Application.Auth.Responses;
+﻿
+namespace AuthService.Application.Auth.Commands.Login;
 
 public sealed class AuthResponse
 {

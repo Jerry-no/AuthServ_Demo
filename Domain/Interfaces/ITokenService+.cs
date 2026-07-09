@@ -1,4 +1,5 @@
-﻿using AuthService.Application.Auth.Responses;
+﻿using AuthService.Application.Auth.Commands.Login;
+using AuthService.Application.Auth.Responses;
 using AuthService.Domain.Entity;
 
 namespace AuthService.Domain.Interfaces;

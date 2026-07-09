@@ -23,7 +23,7 @@ public sealed class UserResponse
 
     public bool MustChangePassword { get; init; }
 
-    // public DateTimeOffset PasswordSetAt { get; init; }  //time set pass
+    public DateTimeOffset PasswordSetAt { get; init; }  //time set pass
 
     public DateTimeOffset? PasswordChangedAt { get; init; }  // time change pass
 

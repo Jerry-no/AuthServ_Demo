@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Auth.Responses;
+﻿using AuthService.Application.Auth.Commands.Login;
 using AuthService.Common.Abstractions.Messaging;
 
 namespace AuthService.Application.Auth.Commands.Register;
