@@ -29,9 +29,9 @@ public sealed class UserResponse
 
     public DateTimeOffset? PasswordExpiresAt { get; init; }  // expiration pass
 
-    public bool IsEmailVerified { get; init; }
+    public DateTimeOffset? EmailVerifiedAt { get; set; }
 
-    public bool IsPhoneVerified { get; init; }
+    public DateTimeOffset? PhoneVerifiedAt { get; set; }
 
     public DateTimeOffset? LastLoginAt { get; init; }
 

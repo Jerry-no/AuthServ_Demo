@@ -1,4 +1,5 @@
 using AuthService.Application;
+using AuthService.Application.Mapper;
 using AuthService.Common.Abstractions;
 using AuthService.Common.Exceptions;
 using AuthService.Common.Filters;
@@ -42,6 +43,7 @@ builder.Services.AddProblemDetails();
 var app = builder.Build();
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<LoggingEnricherMiddleware>();
+builder.Services.AddScoped<IUserMapper, UserMapper>();
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())

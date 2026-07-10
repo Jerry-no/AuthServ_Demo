@@ -1,4 +1,5 @@
-﻿using AuthService.Application.Auth.Queries.Users.GetUsers;
+﻿using AuthService.Application.Auth.Queries.Users.GetUserById;
+using AuthService.Application.Auth.Queries.Users.GetUsers;
 using AuthService.Common.Dtos;
 using AuthService.Common.Filters;
 using MediatR;
@@ -24,6 +25,15 @@ public sealed class UsersController : BaseApiController
     {
         var result = await _sender.Send(query, cancellationToken);
 
+        return Success(result);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ApiResult), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetUserById([FromRoute] GetUserByIdQuery query,
+        CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(query, cancellationToken);
         return Success(result);
     }
 }
