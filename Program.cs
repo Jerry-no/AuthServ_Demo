@@ -5,7 +5,10 @@ using AuthService.Common.Exceptions;
 using AuthService.Common.Filters;
 using AuthService.Common.Middlewares;
 using AuthService.Common.Validation;
+using AuthService.Domain.Interfaces;
+using AuthService.Infrastructure;
 using AuthService.Infrastructure.Persistence;
+using AuthService.Infrastructure.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Mapster;
@@ -20,14 +23,11 @@ builder.Services.AddScoped<IMapper, ServiceMapper>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-builder.Services.AddDbContext<AuthDbContext>();
-
 builder.Services.AddApplication(builder.Configuration);
 
-builder.Services.AddDbContext<AuthDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ECMAnnDb"));
-});
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers(options =>
 {
@@ -43,7 +43,6 @@ builder.Services.AddProblemDetails();
 var app = builder.Build();
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<LoggingEnricherMiddleware>();
-builder.Services.AddScoped<IUserMapper, UserMapper>();
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())

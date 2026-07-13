@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.Auth.Queries.Users.GetUserById;
+using AuthService.Application.Auth.Queries.Users.GetUserByMail;
 using AuthService.Application.Auth.Queries.Users.GetUsers;
 using AuthService.Common.Dtos;
 using AuthService.Common.Filters;
@@ -28,9 +29,18 @@ public sealed class UsersController : BaseApiController
         return Success(result);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{Id}")]
     [ProducesResponseType(typeof(ApiResult), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetUserById([FromRoute] GetUserByIdQuery query,
+        CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(query, cancellationToken);
+        return Success(result);
+    }
+    
+    [HttpGet("e/{Email}")]
+    [ProducesResponseType(typeof(ApiResult), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetUserByMail([FromRoute] GetUserByMailQuery query,
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(query, cancellationToken);

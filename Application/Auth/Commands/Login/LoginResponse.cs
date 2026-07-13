@@ -1,7 +1,7 @@
 ﻿
 namespace AuthService.Application.Auth.Commands.Login;
 
-public sealed class AuthResponse
+public sealed class LoginResponse
 {
     public Guid UserId { get; init; }
 
